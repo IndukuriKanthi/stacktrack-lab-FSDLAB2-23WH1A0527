@@ -1,4 +1,5 @@
 import React from 'react';
+import {get} from '../../api/client';
 import {useState,useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 
@@ -11,9 +12,18 @@ function QuestionComponent(){
   const[d,setD] = useState(null);
   // TODO: Implement data fetching inside a useEffect hook
   useEffect(()=>{
-    fetch(`http://bvrithcloud.com/api/tasks/${id}`,
-    {headers:{"x-student-id" : "23WH1A0527"}})
-    .then(r => r.json()).then(setD);
+    fetch(`http://bvrithcloud.com/api/tasks/${id}`,{
+      method:"GET",
+      headers:{
+        "x-student-id" : "23WH1A0527",
+        "content-type" : "application/json"
+      },
+      mode:'cors'
+    })
+    .then(r => r.json()).then(res=>{
+      console.log(res);
+      setD(res.data);
+    });
   }, [id]);
 
   // TODO: Implement any event handlers required by your question set

@@ -1,5 +1,5 @@
 import React from 'react';
-import QuestionComponent from '../components/question/QuestionComponent';
+import {Link} from 'react-router-dom';
 
 // TODO: Replace placeholder values with actual student and lab identifiers
 const STUDENT_ID = '23WH1A0527';
@@ -12,9 +12,12 @@ function Home() {
       <p>Student ID: {STUDENT_ID}</p>
       <p>Lab ID: {LAB_ID}</p>
 
+      <h3>Tasks</h3>
+      <Link to="/task/1">task 1</Link><br/>
+      <Link to="/task/2">task 2</Link>
+
       {/* TODO: Replace this placeholder with your question set UI */}
       <p>QuestionComponent placeholder — implement your assigned question set here.</p>
-      <p><QuestionComponent  /></p>
 
     </div>
   );
