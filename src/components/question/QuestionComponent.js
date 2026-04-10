@@ -1,5 +1,4 @@
 import React from 'react';
-import {get} from '../../api/client';
 import {useState,useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 
@@ -9,25 +8,17 @@ import {useParams} from 'react-router-dom';
 function QuestionComponent(){
   // TODO: Define state variables needed for your question set
   const {id} = useParams();
-  const[d,setD] = useState(null);
+  const[d,setD] = useState({});
   // TODO: Implement data fetching inside a useEffect hook
   useEffect(()=>{
-    fetch(`http://bvrithcloud.com/api/tasks/${id}`,{
-      method:"GET",
-      headers:{
-        "x-student-id" : "23WH1A0527",
-        "content-type" : "application/json"
-      },
-      mode:'cors'
-    })
-    .then(r => r.json()).then(res=>{
-      console.log(res);
-      setD(res.data);
-    });
+    fetch(`http://bvrithcloud.com/api/tasks/${id}`,
+    {headers:{"x-student-id" : "23WH1A0527"}})
+    .then(r => r.json()).then(res=>setD(res.data || res))
+    .catch(err=>console.log(err));
   }, [id]);
 
   // TODO: Implement any event handlers required by your question set
-  if(!d) return "Loading ...";
+  if(!d._id) return "Loading ...";
 
   return (
     <div>

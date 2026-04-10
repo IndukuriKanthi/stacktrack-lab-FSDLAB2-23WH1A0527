@@ -13,8 +13,8 @@ function Home() {
       <p>Lab ID: {LAB_ID}</p>
 
       <h3>Tasks</h3>
-      <Link to="/task/1">task 1</Link><br/>
-      <Link to="/task/2">task 2</Link>
+      <Link to="/tasks/1">task 1</Link><br/>
+      <Link to="/tasks/2">task 2</Link>
 
       {/* TODO: Replace this placeholder with your question set UI */}
       <p>QuestionComponent placeholder — implement your assigned question set here.</p>
