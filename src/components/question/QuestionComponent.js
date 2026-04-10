@@ -1,19 +1,20 @@
 import React from 'react';
-import {get} from '../api/client';
+import {useState,useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 
 // TODO: Import any API functions you need from '../../api/client'
 // Example: import { get, post } from '../../api/client';
 
-function QuestionComponent() {
+function QuestionComponent(){
   // TODO: Define state variables needed for your question set
   const {id} = useParams();
-  const[d,setD] = useState([]);
+  const[d,setD] = useState(null);
   // TODO: Implement data fetching inside a useEffect hook
-  useEffect(() => {
-    fetch('http://bvrithcloud.com/api/tasks/${id}',
-    {header:{"x-student-id" : "23WH1A0527"}})
+  useEffect(()=>{
+    fetch(`http://bvrithcloud.com/api/tasks/${id}`,
+    {headers:{"x-student-id" : "23WH1A0527"}})
     .then(r => r.json()).then(setD);
-  }, [id]);};
+  }, [id]);
 
   // TODO: Implement any event handlers required by your question set
   if(!d) return "Loading ...";
@@ -22,14 +23,16 @@ function QuestionComponent() {
     <div>
       {/* TODO: Replace this placeholder with your question set UI */}
       <div>
-        <p>{d._id}</p>
-        <p>{d.title}</p>
-        <p>{d.description}</p>
-        <p>{d.status}</p>
+        <h2>Task Details</h2>
+        <p>id = {d._id}</p>
+        <p>title = {d.title}</p>
+        <p>description = {d.description}</p>
+        <p>status = {d.status}</p>
       </div>
 
       {/* TODO: Render fetched data or form elements as required */}
     </div>
   );
+}
 
 export default QuestionComponent;
