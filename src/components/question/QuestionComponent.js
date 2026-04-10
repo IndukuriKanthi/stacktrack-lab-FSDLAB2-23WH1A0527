@@ -13,12 +13,16 @@ function QuestionComponent(){
   useEffect(()=>{
     fetch(`http://bvrithcloud.com/api/tasks/${id}`,
     {headers:{"x-student-id" : "23WH1A0527"}})
-    .then(r => r.json()).then(res=>setD(res.data || res))
+    .then(r => r.json())
+    .then(res=>{
+      console.log(res);
+      setD(res.data)
+    })
     .catch(err=>console.log(err));
   }, [id]);
 
   // TODO: Implement any event handlers required by your question set
-  if(!d._id) return "Loading ...";
+  if(!d || Object.keys(d).length === 0) return "Loading ...";
 
   return (
     <div>

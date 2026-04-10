@@ -1,25 +1,29 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React,{useEffect,useState} from "react";
+import {Link} from "react-router-dom";
+function Home(){
+  const[tasks,setTasks] = useState([]);
+  useEffect(()=>{
+    fetch("http://bvrithcloud.com/api/tasks",
+      {headers:{"x-student-id":"23WH1A0527"}}
+    )
+    .then(res=>res.json())
+    .then(res=>{
+      console.log(res);
+      setTasks(res.data);
+    })
+    .catch(err=>console.log(err));
+  },[]);
 
-// TODO: Replace placeholder values with actual student and lab identifiers
-const STUDENT_ID = '23WH1A0527';
-const LAB_ID = 'FSDLAB2';
-
-function Home() {
-  return (
+  return(
     <div>
-      <h1>Stack Track Lab</h1>
-      <p>Student ID: {STUDENT_ID}</p>
-      <p>Lab ID: {LAB_ID}</p>
-
-      <h3>Tasks</h3>
-      <Link to="/tasks/1">task 1</Link><br/>
-      <Link to="/tasks/2">task 2</Link>
-
-      {/* TODO: Replace this placeholder with your question set UI */}
-      <p>QuestionComponent placeholder — implement your assigned question set here.</p>
-
-    </div>
+      <h1>FSD LAB</h1>
+      <h2>Tasks</h2>
+      {tasks.map(task=>(
+        <div key = {tasks._id}>
+          <Link to={`/tasks/${task._id}`}>{task.title}</Link>
+        </div>
+      ))}
+      </div>
   );
 }
 
